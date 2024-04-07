@@ -1,5 +1,7 @@
 
-# [arabic-transliteration-keyd-setup](https://github.com/amjadodeh/arabic-transliteration-keyd-setup)
+# [Arabic Transliteration Keyd Setup](https://github.com/amjadodeh/arabic-transliteration-keyd-setup)
+
+**WARNING: This will overwrite your current keyd config if you already have one.**
 
 A repository containing scripts to configure keyd for mapping Arabic characters to specific Unicode characters, facilitating Arabic to English transliteration.
 
@@ -14,8 +16,6 @@ A repository containing scripts to configure keyd for mapping Arabic characters 
 - Any other Non-NixOS distributions (uses nixpkgs): `bash <(curl -sL https://bit.ly/keyd-setup-nixpkgs)`
 
 NOTE: This requires curl to run (obviously)
-
-**WARNING: This will overwrite your current keyd config.**
 
 ## Custom keyd Setup (Manual)
 
