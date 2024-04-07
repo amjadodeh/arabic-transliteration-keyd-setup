@@ -5,7 +5,7 @@
 
 This repository contains scripts to configure keyd for mapping Arabic characters to specific Unicode characters, facilitating Arabic to English transliteration on Linux systems.
 
-## Custom keyd Setup (Automated)
+## Automated Keyd Setup
 
 ### Distros:
 
@@ -17,7 +17,7 @@ This repository contains scripts to configure keyd for mapping Arabic characters
 
 NOTE: This requires curl to run (obviously)
 
-## Custom keyd Setup (Manual)
+## Manual Keyd Setup
 
 ### Alpine Linux:
 
