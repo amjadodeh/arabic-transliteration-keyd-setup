@@ -26,6 +26,8 @@ NOTE: This requires curl to run (obviously)
 
 ### Alpine Linux:
 
+Run the following in your terminal:
+
 ```bash
 # Add required repositories (testing repo is optional)
 echo "
@@ -92,6 +94,8 @@ doas rc-service keyd start
 
 ### openSUSE:
 
+Run the following in your terminal:
+
 ```bash
 # Install keyd
 sudo zypper install keyd
@@ -148,6 +152,8 @@ systemctl enable --now keyd.service
 - curl must be installed
 - systemd init system
 - /etc/sudoers exists
+
+Run the following in your terminal:
 
 ```bash
 # Install Nix package manager using the single-user installation script (assuming its not already installed)
