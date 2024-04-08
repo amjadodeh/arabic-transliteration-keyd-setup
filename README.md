@@ -19,6 +19,11 @@ NOTE: This requires curl to run (obviously)
 
 ## Manual Setup
 
+- [Alpine Linux](#alpine-linux)
+- [openSUSE](#opensuse)
+- [Other Non-NixOS Distros](#using-nix-package-manager-on-non-nixos)
+- [NixOS](#using-nixos)
+
 ### Alpine Linux:
 
 ```bash
