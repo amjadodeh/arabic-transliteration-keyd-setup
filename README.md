@@ -1,5 +1,5 @@
 
-# [Arabic Transliteration Keyd Setup](https://github.com/amjadodeh/arabic-transliteration-keyd-setup)
+# Arabic Transliteration Keyd Setup
 
 **WARNING: This will overwrite your current keyd config if you already have one.**
 
