@@ -23,9 +23,7 @@ WantedBy=default.target
 
 sudo mkdir -p /etc/keyd/
 
-KEYD_COMPOSE_PATH=$(sudo find / -name 'keyd.compose' | grep "/nix/store/.*$($HOME/.nix-profile/bin/keyd -v | grep -oP 'v\K[0-9.]+')/share/keyd/keyd.compose")
-
-ln -s $KEYD_COMPOSE_PATH ~/.XCompose
+ln -s "$(nix-build '<nixpkgs>' --attr keyd --no-out-link)/share/keyd/keyd.compose" ~/.XCompose
 
 head -n 10000 ~/.XCompose > ~/.XCompose.temp && mv ~/.XCompose.temp ~/.XCompose
 

@@ -189,11 +189,8 @@ WantedBy=default.target
 # Make directory for keyd config files if it doesn't already exist
 sudo mkdir -p /etc/keyd/
 
-# Find path for keyd.compose
-KEYD_COMPOSE_PATH=$(sudo find / -name 'keyd.compose' | grep "/nix/store/.*$($HOME/.nix-profile/bin/keyd -v | grep -oP 'v\K[0-9.]+')/share/keyd/keyd.compose")
-
 # Add unicode support for current user by symlinking path of keyd.compose to ~/.XCompose
-ln -s $KEYD_COMPOSE_PATH ~/.XCompose
+ln -s "$(nix-build '<nixpkgs>' --attr keyd --no-out-link)/share/keyd/keyd.compose" ~/.XCompose
 
 # Prune every line in .XCompose after line 10000 to prevent GTK4 compiled apps from crashing
 head -n 10000 ~/.XCompose > ~/.XCompose.temp && mv ~/.XCompose.temp ~/.XCompose
