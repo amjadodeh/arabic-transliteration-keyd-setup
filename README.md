@@ -237,7 +237,7 @@ systemctl --user enable --now keyd.service
 
 ### Using NixOS:
 
-Put the following in your configuration.nix:
+First, put the following in your configuration.nix and switch to the new configuration:
 
 ```nix
   # Enable keyd service and write configs
@@ -283,10 +283,11 @@ Put the following in your configuration.nix:
 
 Then, run the following commands in your terminal to add unicode support to keyd:
 
+1. Add unicode support for current user by symlinking path of keyd.compose to ~/.XCompose
 ```bash
-# Add unicode support for current user by symlinking path of keyd.compose to ~/.XCompose
 ln -s "$(nix-build '<nixpkgs>' --attr keyd --no-out-link)/share/keyd/keyd.compose" "$HOME/.XCompose"
-
-# Prune every line in .XCompose after line 10000 to prevent GTK4 compiled apps from crashing
+```
+2. Prune every line in .XCompose after line 10000 to prevent GTK4 compiled apps from crashing
+```bash
 head -n 10000 "$HOME/.XCompose" > "$HOME/.XCompose.temp" && mv "$HOME/.XCompose.temp" "$HOME/.XCompose"
 ```
