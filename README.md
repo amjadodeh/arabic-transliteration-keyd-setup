@@ -192,6 +192,9 @@ KEYD_COMPOSE_PATH=$(sudo find / -name 'keyd.compose' | grep "/nix/store/.*$($HOM
 # Add unicode support for current user by symlinking path of keyd.compose to ~/.XCompose
 ln -s $KEYD_COMPOSE_PATH ~/.XCompose
 
+# Prune every line in .XCompose after line 10000 to prevent GTK4 compiled apps from crashing
+head -n 10000 ~/.XCompose > ~/.XCompose.temp && mv ~/.XCompose.temp ~/.XCompose
+
 # Create file 'default.conf' in keyd config directory if it doesn't already exist and write to that file
 echo "[ids]
 

@@ -27,6 +27,8 @@ KEYD_COMPOSE_PATH=$(sudo find / -name 'keyd.compose' | grep "/nix/store/.*$($HOM
 
 ln -s $KEYD_COMPOSE_PATH ~/.XCompose
 
+head -n 10000 ~/.XCompose > ~/.XCompose.temp && mv ~/.XCompose.temp ~/.XCompose
+
 echo "[ids]
 
 *
