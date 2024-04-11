@@ -287,5 +287,9 @@ Put the following in your configuration.nix:
 Then, run the following commands in your terminal to add unicode support to keyd:
 
 ```bash
-ln -s "$(nix-build '<nixpkgs>' --attr keyd --no-out-link)/share/keyd/keyd.compose" "$HOME/.XCompose" && head -n 10000 "$HOME/.XCompose" > "$HOME/.XCompose.temp" && mv "$HOME/.XCompose.temp" "$HOME/.XCompose"
+# Add unicode support for current user by symlinking path of keyd.compose to ~/.XCompose
+ln -s "$(nix-build '<nixpkgs>' --attr keyd --no-out-link)/share/keyd/keyd.compose" "$HOME/.XCompose"
+
+# Prune every line in .XCompose after line 10000 to prevent GTK4 compiled apps from crashing
+head -n 10000 "$HOME/.XCompose" > "$HOME/.XCompose.temp" && mv "$HOME/.XCompose.temp" "$HOME/.XCompose"
 ```
