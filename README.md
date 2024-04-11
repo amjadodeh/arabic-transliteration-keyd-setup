@@ -106,6 +106,9 @@ sudo mkdir -p /etc/keyd/
 # Add unicode support for current user by symlinking /usr/share/keyd/keyd.compose to ~/.XCompose
 ln -s /usr/share/keyd/keyd.compose ~/.XCompose
 
+# Prune every line in .XCompose after line 10000 to prevent GTK4 compiled apps from crashing
+head -n 10000 ~/.XCompose > ~/.XCompose.temp && mv ~/.XCompose.temp ~/.XCompose
+
 # Create file 'default.conf' in keyd config directory if it doesn't already exist and write to that file
 echo "[ids]
 
