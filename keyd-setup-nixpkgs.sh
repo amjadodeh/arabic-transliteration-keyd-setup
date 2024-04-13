@@ -10,7 +10,7 @@ echo "$USER ALL=(ALL) NOPASSWD: $HOME/.nix-profile/bin/keyd" | sudo tee -a /etc/
 
 mkdir -p $HOME/.config/systemd/user/
 
-sudo tee $HOME/.config/systemd/user/keyd.service 1> /dev/null <<- 'EOF'
+sudo tee $HOME/.config/systemd/user/keyd.service 1> /dev/null <<- EOF
 	[Unit]
 	Description=key remapping daemon
 

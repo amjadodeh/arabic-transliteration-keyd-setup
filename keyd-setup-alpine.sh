@@ -1,6 +1,6 @@
 #!/bin/ash
 
-doas tee /etc/apk/repositories 1> /dev/null <<- 'EOF'
+doas tee /etc/apk/repositories 1> /dev/null <<- EOF
 	https://dl-cdn.alpinelinux.org/alpine/v$(cut -d'.' -f1,2 /etc/alpine-release)/main/
 	https://dl-cdn.alpinelinux.org/alpine/v$(cut -d'.' -f1,2 /etc/alpine-release)/community/
 	https://dl-cdn.alpinelinux.org/alpine/edge/testing/
