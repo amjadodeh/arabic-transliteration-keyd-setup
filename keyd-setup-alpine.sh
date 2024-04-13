@@ -2,6 +2,8 @@
 
 doas setup-apkrepos -c1
 
+doas sort -ruo /etc/apk/repositories /etc/apk/repositories
+
 doas apk update
 
 doas apk add keyd
