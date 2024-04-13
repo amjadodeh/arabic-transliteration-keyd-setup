@@ -28,13 +28,9 @@ NOTE: This requires curl to run
 
 Run the following in your terminal:
 
-1. Add required repositories (testing repo is optional)
+1. Add required repositories
 ```bash
-doas tee /etc/apk/repositories 1> /dev/null <<- EOF
-	https://dl-cdn.alpinelinux.org/alpine/v$(cut -d'.' -f1,2 /etc/alpine-release)/main/
-	https://dl-cdn.alpinelinux.org/alpine/v$(cut -d'.' -f1,2 /etc/alpine-release)/community/
-	https://dl-cdn.alpinelinux.org/alpine/edge/testing/
-EOF
+doas setup-apkrepos -c1
 ```
 
 2. Update the index of available packages to account for new repos
