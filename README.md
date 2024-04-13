@@ -30,7 +30,7 @@ Run the following in your terminal:
 
 1. Add required repositories (testing repo is optional)
 ```bash
-doas tee /etc/apk/repositories 1> /dev/null <<- 'EOF'
+doas tee /etc/apk/repositories 1> /dev/null <<- EOF
 	https://dl-cdn.alpinelinux.org/alpine/v$(cut -d'.' -f1,2 /etc/alpine-release)/main/
 	https://dl-cdn.alpinelinux.org/alpine/v$(cut -d'.' -f1,2 /etc/alpine-release)/community/
 	https://dl-cdn.alpinelinux.org/alpine/edge/testing/
@@ -214,7 +214,7 @@ mkdir -p $HOME/.config/systemd/user/
 
 6. Create systemd user service file for keyd
 ```bash
-sudo tee $HOME/.config/systemd/user/keyd.service 1> /dev/null <<- 'EOF'
+sudo tee $HOME/.config/systemd/user/keyd.service 1> /dev/null <<- EOF
 	[Unit]
 	Description=key remapping daemon
 
