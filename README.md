@@ -28,45 +28,43 @@ NOTE: This requires curl to run
 
 Run the following in your terminal:
 
-1. Add the community repository to /etc/apk/repositories (skip this step if its already enabled)
+1. Add the community repositories to /etc/apk/repositories (skip this step if its already enabled)
 ```bash
-doas setup-apkrepos -c1
+doas tee /etc/apk/repositories 1> /dev/null <<- EOF
+	#/media/cdrom/apks
+	https://dl-cdn.alpinelinux.org/alpine/v$(cut -d'.' -f1,2 /etc/alpine-release)/main
+	https://dl-cdn.alpinelinux.org/alpine/v$(cut -d'.' -f1,2 /etc/alpine-release)/community
+	https://dl-cdn.alpinelinux.org/alpine/edge/main
+	https://dl-cdn.alpinelinux.org/alpine/edge/community
+EOF
 ```
 
-2. Clean up /etc/apk/repositories (optional)
-```bash
-doas sed -i 's/^#http/http/' /etc/apk/repositories
-doas sed -i -e '/^#.*/d' /etc/apk/repositories
-doas sort -ruo /etc/apk/repositories /etc/apk/repositories
-doas sed -i -e '1i#/media/cdrom/apks' /etc/apk/repositories
-```
-
-3. Update the index of available packages to account for new repos
+2. Update the index of available packages to account for new repos
 ```bash
 doas apk update
 ```
 
-4. Install keyd
+3. Install keyd
 ```bash
 doas apk add keyd
 ```
 
-5. Make directory for config files if it doesn't already exist
+4. Make directory for config files if it doesn't already exist
 ```bash
 doas mkdir -p /etc/keyd/
 ```
 
-6. Add unicode support for current user by symlinking /usr/share/keyd/keyd.compose to ~/.XCompose
+5. Add unicode support for current user by symlinking /usr/share/keyd/keyd.compose to ~/.XCompose
 ```bash
 ln -s /usr/share/keyd/keyd.compose ~/.XCompose
 ```
 
-7. Prune every line in .XCompose after line 10000 to prevent GTK4 compiled apps from crashing
+6. Prune every line in .XCompose after line 10000 to prevent GTK4 compiled apps from crashing
 ```bash
 head -n 10000 ~/.XCompose > ~/.XCompose.temp && mv -f ~/.XCompose.temp ~/.XCompose
 ```
 
-8. Create file 'default.conf' in keyd config directory if it doesn't already exist and write to that file
+7. Create file 'default.conf' in keyd config directory if it doesn't already exist and write to that file
 ```bash
 doas tee /etc/keyd/default.conf 1> /dev/null <<- 'EOF'
 	[ids]
@@ -103,11 +101,11 @@ doas tee /etc/keyd/default.conf 1> /dev/null <<- 'EOF'
 EOF
 ```
 
-9. Enable keyd daemon
+8. Enable keyd daemon
 ```bash
 doas rc-update add keyd default
 ```
-10. Start keyd daemon
+9. Start keyd daemon
 ```bash
 doas rc-service keyd start
 ```
