@@ -30,11 +30,11 @@ Run the following in your terminal:
 
 1. Add required repositories (testing repo is optional)
 ```bash
-echo "
-https://dl-cdn.alpinelinux.org/alpine/v$(cut -d'.' -f1,2 /etc/alpine-release)/main/
-https://dl-cdn.alpinelinux.org/alpine/v$(cut -d'.' -f1,2 /etc/alpine-release)/community/
-https://dl-cdn.alpinelinux.org/alpine/edge/testing/
-" | doas tee /etc/apk/repositories 1> /dev/null
+doas tee /etc/apk/repositories 1> /dev/null <<- 'EOF'
+	https://dl-cdn.alpinelinux.org/alpine/v$(cut -d'.' -f1,2 /etc/alpine-release)/main/
+	https://dl-cdn.alpinelinux.org/alpine/v$(cut -d'.' -f1,2 /etc/alpine-release)/community/
+	https://dl-cdn.alpinelinux.org/alpine/edge/testing/
+EOF
 ```
 
 2. Update the index of available packages to account for new repos
@@ -64,38 +64,39 @@ head -n 10000 ~/.XCompose > ~/.XCompose.temp && mv ~/.XCompose.temp ~/.XCompose
 
 7. Create file 'default.conf' in keyd config directory if it doesn't already exist and write to that file
 ```bash
-echo "[ids]
+doas tee /etc/keyd/default.conf 1> /dev/null <<- 'EOF'
+	[ids]
 
-*
+	*
 
-[main]
+	[main]
 
-leftalt = layer(alt)
+	leftalt = layer(alt)
 
-[alt]
+	[alt]
 
-a = ā
-d = ḍ
-h = ḥ
-i = ī
-s = ṣ
-t = ṭ
-u = ū
-z = ẓ
-l = ʿ
-j = ʾ
+	a = ā
+	d = ḍ
+	h = ḥ
+	i = ī
+	s = ṣ
+	t = ṭ
+	u = ū
+	z = ẓ
+	l = ʿ
+	j = ʾ
 
-[alt+shift]
+	[alt+shift]
 
-a = Ā
-d = Ḍ
-h = Ḥ
-i = Ī
-s = Ṣ
-t = Ṭ
-u = Ū
-z = Ẓ
-" | doas tee /etc/keyd/default.conf 1> /dev/null
+	a = Ā
+	d = Ḍ
+	h = Ḥ
+	i = Ī
+	s = Ṣ
+	t = Ṭ
+	u = Ū
+	z = Ẓ
+EOF
 ```
 
 8. Enable keyd daemon
@@ -135,38 +136,39 @@ head -n 10000 ~/.XCompose > ~/.XCompose.temp && mv ~/.XCompose.temp ~/.XCompose
 
 5. Create file 'default.conf' in keyd config directory if it doesn't already exist and write to that file
 ```bash
-echo "[ids]
+sudo tee /etc/keyd/default.conf 1> /dev/null <<- 'EOF'
+	[ids]
 
-*
+	*
 
-[main]
+	[main]
 
-leftalt = layer(alt)
+	leftalt = layer(alt)
 
-[alt]
+	[alt]
 
-a = ā
-d = ḍ
-h = ḥ
-i = ī
-s = ṣ
-t = ṭ
-u = ū
-z = ẓ
-l = ʿ
-j = ʾ
+	a = ā
+	d = ḍ
+	h = ḥ
+	i = ī
+	s = ṣ
+	t = ṭ
+	u = ū
+	z = ẓ
+	l = ʿ
+	j = ʾ
 
-[alt+shift]
+	[alt+shift]
 
-a = Ā
-d = Ḍ
-h = Ḥ
-i = Ī
-s = Ṣ
-t = Ṭ
-u = Ū
-z = Ẓ
-" | sudo tee /etc/keyd/default.conf 1> /dev/null
+	a = Ā
+	d = Ḍ
+	h = Ḥ
+	i = Ī
+	s = Ṣ
+	t = Ṭ
+	u = Ū
+	z = Ẓ
+EOF
 ```
 
 6. Enable and start keyd daemon
@@ -212,16 +214,17 @@ mkdir -p $HOME/.config/systemd/user/
 
 6. Create systemd user service file for keyd
 ```bash
-echo "[Unit]
-Description=key remapping daemon
+sudo tee $HOME/.config/systemd/user/keyd.service 1> /dev/null <<- 'EOF'
+	[Unit]
+	Description=key remapping daemon
 
-[Service]
-Type=simple
-ExecStart=/usr/bin/sudo $HOME/.nix-profile/bin/keyd
+	[Service]
+	Type=simple
+	ExecStart=/usr/bin/sudo $HOME/.nix-profile/bin/keyd
 
-[Install]
-WantedBy=default.target
-" | sudo tee $HOME/.config/systemd/user/keyd.service 1> /dev/null
+	[Install]
+	WantedBy=default.target
+EOF
 ```
 
 7. Make directory for keyd config files if it doesn't already exist
@@ -241,38 +244,39 @@ head -n 10000 ~/.XCompose > ~/.XCompose.temp && mv ~/.XCompose.temp ~/.XCompose
 
 10. Create file 'default.conf' in keyd config directory if it doesn't already exist and write to that file
 ```bash
-echo "[ids]
+sudo tee /etc/keyd/default.conf 1> /dev/null <<- 'EOF'
+	[ids]
 
-*
+	*
 
-[main]
+	[main]
 
-leftalt = layer(alt)
+	leftalt = layer(alt)
 
-[alt]
+	[alt]
 
-a = ā
-d = ḍ
-h = ḥ
-i = ī
-s = ṣ
-t = ṭ
-u = ū
-z = ẓ
-l = ʿ
-j = ʾ
+	a = ā
+	d = ḍ
+	h = ḥ
+	i = ī
+	s = ṣ
+	t = ṭ
+	u = ū
+	z = ẓ
+	l = ʿ
+	j = ʾ
 
-[alt+shift]
+	[alt+shift]
 
-a = Ā
-d = Ḍ
-h = Ḥ
-i = Ī
-s = Ṣ
-t = Ṭ
-u = Ū
-z = Ẓ
-" | sudo tee /etc/keyd/default.conf 1> /dev/null
+	a = Ā
+	d = Ḍ
+	h = Ḥ
+	i = Ī
+	s = Ṣ
+	t = Ṭ
+	u = Ū
+	z = Ẓ
+EOF
 ```
 
 11. Enable and start keyd daemon
