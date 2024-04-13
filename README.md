@@ -28,37 +28,42 @@ NOTE: This requires curl to run
 
 Run the following in your terminal:
 
-1. Add required repositories
+1. Add the community repository to /etc/apk/repositories (skip this step if its already enabled)
 ```bash
 doas setup-apkrepos -c1
 ```
 
-2. Update the index of available packages to account for new repos
+2. Sort and remove duplicates from /etc/apk/repositories (optional)
+```bash
+doas sort -ruo /etc/apk/repositories /etc/apk/repositories
+```
+
+3. Update the index of available packages to account for new repos
 ```bash
 doas apk update
 ```
 
-3. Install keyd
+4. Install keyd
 ```bash
 doas apk add keyd
 ```
 
-4. Make directory for config files if it doesn't already exist
+5. Make directory for config files if it doesn't already exist
 ```bash
 doas mkdir -p /etc/keyd/
 ```
 
-5. Add unicode support for current user by symlinking /usr/share/keyd/keyd.compose to ~/.XCompose
+6. Add unicode support for current user by symlinking /usr/share/keyd/keyd.compose to ~/.XCompose
 ```bash
 ln -s /usr/share/keyd/keyd.compose ~/.XCompose
 ```
 
-6. Prune every line in .XCompose after line 10000 to prevent GTK4 compiled apps from crashing
+7. Prune every line in .XCompose after line 10000 to prevent GTK4 compiled apps from crashing
 ```bash
 head -n 10000 ~/.XCompose > ~/.XCompose.temp && mv -f ~/.XCompose.temp ~/.XCompose
 ```
 
-7. Create file 'default.conf' in keyd config directory if it doesn't already exist and write to that file
+8. Create file 'default.conf' in keyd config directory if it doesn't already exist and write to that file
 ```bash
 doas tee /etc/keyd/default.conf 1> /dev/null <<- 'EOF'
 	[ids]
@@ -95,11 +100,11 @@ doas tee /etc/keyd/default.conf 1> /dev/null <<- 'EOF'
 EOF
 ```
 
-8. Enable keyd daemon
+9. Enable keyd daemon
 ```bash
 doas rc-update add keyd default
 ```
-9. Start keyd daemon
+10. Start keyd daemon
 ```bash
 doas rc-service keyd start
 ```
