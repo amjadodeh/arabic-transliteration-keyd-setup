@@ -1,7 +1,7 @@
 
 # Arabic Transliteration Keyd Setup
 
-**WARNING: This will overwrite your current keyd config if you already have one.**
+**WARNING: This will overwrite your current keyd config (/etc/keyd/default.conf) if you already have one.**
 
 This repository contains scripts to configure keyd for mapping Arabic characters to specific Unicode characters, facilitating Arabic to English transliteration on Linux systems.
 
