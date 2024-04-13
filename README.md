@@ -33,9 +33,12 @@ Run the following in your terminal:
 doas setup-apkrepos -c1
 ```
 
-2. Sort and remove duplicates from /etc/apk/repositories (optional)
+2. Clean up /etc/apk/repositories (optional)
 ```bash
+doas sed -i 's/^#http/http/' /etc/apk/repositories
+doas sed -i -e '/^#.*/d' /etc/apk/repositories
 doas sort -ruo /etc/apk/repositories /etc/apk/repositories
+doas sed -i -e '1i#/media/cdrom/apks' /etc/apk/repositories
 ```
 
 3. Update the index of available packages to account for new repos
