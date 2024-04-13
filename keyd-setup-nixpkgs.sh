@@ -26,7 +26,7 @@ sudo mkdir -p /etc/keyd/
 
 ln -s "$(nix-build '<nixpkgs>' --attr keyd --no-out-link)/share/keyd/keyd.compose" ~/.XCompose
 
-head -n 10000 ~/.XCompose > ~/.XCompose.temp && mv ~/.XCompose.temp ~/.XCompose
+head -n 10000 ~/.XCompose > ~/.XCompose.temp && mv -f ~/.XCompose.temp ~/.XCompose
 
 sudo tee /etc/keyd/default.conf 1> /dev/null <<- 'EOF'
 	[ids]

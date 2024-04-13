@@ -59,7 +59,7 @@ ln -s /usr/share/keyd/keyd.compose ~/.XCompose
 
 6. Prune every line in .XCompose after line 10000 to prevent GTK4 compiled apps from crashing
 ```bash
-head -n 10000 ~/.XCompose > ~/.XCompose.temp && mv ~/.XCompose.temp ~/.XCompose
+head -n 10000 ~/.XCompose > ~/.XCompose.temp && mv -f ~/.XCompose.temp ~/.XCompose
 ```
 
 7. Create file 'default.conf' in keyd config directory if it doesn't already exist and write to that file
@@ -131,7 +131,7 @@ ln -s /usr/share/keyd/keyd.compose ~/.XCompose
 
 4. Prune every line in .XCompose after line 10000 to prevent GTK4 compiled apps from crashing
 ```bash
-head -n 10000 ~/.XCompose > ~/.XCompose.temp && mv ~/.XCompose.temp ~/.XCompose
+head -n 10000 ~/.XCompose > ~/.XCompose.temp && mv -f ~/.XCompose.temp ~/.XCompose
 ```
 
 5. Create file 'default.conf' in keyd config directory if it doesn't already exist and write to that file
@@ -239,7 +239,7 @@ ln -s "$(nix-build '<nixpkgs>' --attr keyd --no-out-link)/share/keyd/keyd.compos
 
 9. Prune every line in .XCompose after line 10000 to prevent GTK4 compiled apps from crashing
 ```bash
-head -n 10000 ~/.XCompose > ~/.XCompose.temp && mv ~/.XCompose.temp ~/.XCompose
+head -n 10000 ~/.XCompose > ~/.XCompose.temp && mv -f ~/.XCompose.temp ~/.XCompose
 ```
 
 10. Create file 'default.conf' in keyd config directory if it doesn't already exist and write to that file
@@ -340,5 +340,5 @@ ln -s "$(nix-build '<nixpkgs>' --attr keyd --no-out-link)/share/keyd/keyd.compos
 ```
 2. Prune every line in .XCompose after line 10000 to prevent GTK4 compiled apps from crashing
 ```bash
-head -n 10000 "$HOME/.XCompose" > "$HOME/.XCompose.temp" && mv "$HOME/.XCompose.temp" "$HOME/.XCompose"
+head -n 10000 "$HOME/.XCompose" > "$HOME/.XCompose.temp" && mv -f "$HOME/.XCompose.temp" "$HOME/.XCompose"
 ```

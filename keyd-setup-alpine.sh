@@ -14,7 +14,7 @@ doas mkdir -p /etc/keyd/
 
 ln -s /usr/share/keyd/keyd.compose ~/.XCompose
 
-head -n 10000 ~/.XCompose > ~/.XCompose.temp && mv ~/.XCompose.temp ~/.XCompose
+head -n 10000 ~/.XCompose > ~/.XCompose.temp && mv -f ~/.XCompose.temp ~/.XCompose
 
 doas tee /etc/keyd/default.conf 1> /dev/null <<- 'EOF'
 	[ids]
