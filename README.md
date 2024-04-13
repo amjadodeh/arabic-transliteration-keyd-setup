@@ -7,6 +7,8 @@ This repository contains scripts to configure keyd for mapping Arabic characters
 
 ## Automated Setup
 
+NOTE: This requires curl to run
+
 ### Distros:
 
 - Alpine Linux: `ash <(curl -sL https://bit.ly/keyd-setup-alpine)`
@@ -14,8 +16,6 @@ This repository contains scripts to configure keyd for mapping Arabic characters
 - Fedora (via nixpkgs): `bash <(curl -sL https://bit.ly/keyd-setup-nixpkgs)`
 - openSUSE Leap and Tumbleweed: `bash <(curl -sL https://bit.ly/keyd-setup-opensuse)`
 - Any other Non-NixOS distributions (uses nixpkgs): `bash <(curl -sL https://bit.ly/keyd-setup-nixpkgs)`
-
-NOTE: This requires curl to run (obviously)
 
 ## Manual Setup
 
