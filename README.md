@@ -29,7 +29,7 @@ NOTE: This requires curl to run (obviously)
 Run the following in your terminal:
 
 1. Add required repositories (testing repo is optional)
-```bash
+```ash
 doas tee /etc/apk/repositories 1> /dev/null <<- EOF
 	https://dl-cdn.alpinelinux.org/alpine/v$(cut -d'.' -f1,2 /etc/alpine-release)/main/
 	https://dl-cdn.alpinelinux.org/alpine/v$(cut -d'.' -f1,2 /etc/alpine-release)/community/
@@ -38,32 +38,32 @@ EOF
 ```
 
 2. Update the index of available packages to account for new repos
-```bash
+```ash
 doas apk update
 ```
 
 3. Install keyd
-```bash
+```ash
 doas apk add keyd
 ```
 
 4. Make directory for config files if it doesn't already exist
-```bash
+```ash
 doas mkdir -p /etc/keyd/
 ```
 
 5. Add unicode support for current user by symlinking /usr/share/keyd/keyd.compose to ~/.XCompose
-```bash
+```ash
 ln -s /usr/share/keyd/keyd.compose ~/.XCompose
 ```
 
 6. Prune every line in .XCompose after line 10000 to prevent GTK4 compiled apps from crashing
-```bash
+```ash
 head -n 10000 ~/.XCompose > ~/.XCompose.temp && mv ~/.XCompose.temp ~/.XCompose
 ```
 
 7. Create file 'default.conf' in keyd config directory if it doesn't already exist and write to that file
-```bash
+```ash
 doas tee /etc/keyd/default.conf 1> /dev/null <<- 'EOF'
 	[ids]
 
@@ -100,11 +100,11 @@ EOF
 ```
 
 8. Enable keyd daemon
-```bash
+```ash
 doas rc-update add keyd default
 ```
 9. Start keyd daemon
-```bash
+```ash
 doas rc-service keyd start
 ```
 
