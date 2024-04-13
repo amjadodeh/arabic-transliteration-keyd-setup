@@ -1,8 +1,12 @@
 #!/bin/ash
 
-doas setup-apkrepos -c1
-
-doas sort -ruo /etc/apk/repositories /etc/apk/repositories
+doas tee /etc/apk/repositories 1> /dev/null <<- EOF
+	#/media/cdrom/apks
+	https://dl-cdn.alpinelinux.org/alpine/v$(cut -d'.' -f1,2 /etc/alpine-release)/main
+	https://dl-cdn.alpinelinux.org/alpine/v$(cut -d'.' -f1,2 /etc/alpine-release)/community
+	https://dl-cdn.alpinelinux.org/alpine/edge/main
+	https://dl-cdn.alpinelinux.org/alpine/edge/community
+EOF
 
 doas apk update
 
