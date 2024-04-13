@@ -8,38 +8,39 @@ ln -s /usr/share/keyd/keyd.compose ~/.XCompose
 
 head -n 10000 ~/.XCompose > ~/.XCompose.temp && mv ~/.XCompose.temp ~/.XCompose
 
-echo "[ids]
+sudo tee /etc/keyd/default.conf 1> /dev/null <<- 'EOF'
+	[ids]
 
-*
+	*
 
-[main]
+	[main]
 
-leftalt = layer(alt)
+	leftalt = layer(alt)
 
-[alt]
+	[alt]
 
-a = ā
-d = ḍ
-h = ḥ
-i = ī
-s = ṣ
-t = ṭ
-u = ū
-z = ẓ
-l = ʿ
-j = ʾ
+	a = ā
+	d = ḍ
+	h = ḥ
+	i = ī
+	s = ṣ
+	t = ṭ
+	u = ū
+	z = ẓ
+	l = ʿ
+	j = ʾ
 
-[alt+shift]
+	[alt+shift]
 
-a = Ā
-d = Ḍ
-h = Ḥ
-i = Ī
-s = Ṣ
-t = Ṭ
-u = Ū
-z = Ẓ
-" | sudo tee /etc/keyd/default.conf 1> /dev/null
+	a = Ā
+	d = Ḍ
+	h = Ḥ
+	i = Ī
+	s = Ṣ
+	t = Ṭ
+	u = Ū
+	z = Ẓ
+EOF
 
 systemctl enable --now keyd.service
 
