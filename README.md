@@ -28,30 +28,42 @@ NOTE: This requires curl to run (obviously)
 
 Run the following in your terminal:
 
+1. Add required repositories (testing repo is optional)
 ```bash
-# Add required repositories (testing repo is optional)
 echo "
 https://dl-cdn.alpinelinux.org/alpine/v$(cut -d'.' -f1,2 /etc/alpine-release)/main/
 https://dl-cdn.alpinelinux.org/alpine/v$(cut -d'.' -f1,2 /etc/alpine-release)/community/
 https://dl-cdn.alpinelinux.org/alpine/edge/testing/
 " | doas tee /etc/apk/repositories 1> /dev/null
+```
 
-# Update the index of available packages to account for new repos
+2. Update the index of available packages to account for new repos
+```bash
 doas apk update
+```
 
-# Install keyd
+3. Install keyd
+```bash
 doas apk add keyd
+```
 
-# Make directory for config files if it doesn't already exist
+4. Make directory for config files if it doesn't already exist
+```bash
 doas mkdir -p /etc/keyd/
+```
 
-# Add unicode support for current user by symlinking /usr/share/keyd/keyd.compose to ~/.XCompose
+5. Add unicode support for current user by symlinking /usr/share/keyd/keyd.compose to ~/.XCompose
+```bash
 ln -s /usr/share/keyd/keyd.compose ~/.XCompose
+```
 
-# Prune every line in .XCompose after line 10000 to prevent GTK4 compiled apps from crashing
+6. Prune every line in .XCompose after line 10000 to prevent GTK4 compiled apps from crashing
+```bash
 head -n 10000 ~/.XCompose > ~/.XCompose.temp && mv ~/.XCompose.temp ~/.XCompose
+```
 
-# Create file 'default.conf' in keyd config directory if it doesn't already exist and write to that file
+7. Create file 'default.conf' in keyd config directory if it doesn't already exist and write to that file
+```bash
 echo "[ids]
 
 *
@@ -84,32 +96,45 @@ t = Ṭ
 u = Ū
 z = Ẓ
 " | doas tee /etc/keyd/default.conf 1> /dev/null
-
-# Enable and start keyd daemon
-doas rc-update add keyd default
-doas rc-service keyd start
-
-# Thats it! You should now restart your system for changes to take effect.
 ```
+
+8. Enable keyd daemon
+```bash
+doas rc-update add keyd default
+```
+9. Start keyd daemon
+```bash
+doas rc-service keyd start
+```
+
+Thats it! You should now restart your system for changes to take effect.
 
 ### openSUSE:
 
 Run the following in your terminal:
 
+1. Install keyd
 ```bash
-# Install keyd
 sudo zypper install keyd
+```
 
-# Make directory for config files if it doesn't already exist
+2. Make directory for config files if it doesn't already exist
+```bash
 sudo mkdir -p /etc/keyd/
+```
 
-# Add unicode support for current user by symlinking /usr/share/keyd/keyd.compose to ~/.XCompose
+3. Add unicode support for current user by symlinking /usr/share/keyd/keyd.compose to ~/.XCompose
+```bash
 ln -s /usr/share/keyd/keyd.compose ~/.XCompose
+```
 
-# Prune every line in .XCompose after line 10000 to prevent GTK4 compiled apps from crashing
+4. Prune every line in .XCompose after line 10000 to prevent GTK4 compiled apps from crashing
+```bash
 head -n 10000 ~/.XCompose > ~/.XCompose.temp && mv ~/.XCompose.temp ~/.XCompose
+```
 
-# Create file 'default.conf' in keyd config directory if it doesn't already exist and write to that file
+5. Create file 'default.conf' in keyd config directory if it doesn't already exist and write to that file
+```bash
 echo "[ids]
 
 *
@@ -142,12 +167,14 @@ t = Ṭ
 u = Ū
 z = Ẓ
 " | sudo tee /etc/keyd/default.conf 1> /dev/null
-
-# Enable and start keyd daemon
-systemctl enable --now keyd.service
-
-# Thats it! You may have to restart your applications for this to take effect.
 ```
+
+6. Enable and start keyd daemon
+```bash
+systemctl enable --now keyd.service
+```
+
+Thats it! You may have to restart your applications for this to take effect.
 
 ### Using Nix Package Manager (on non-NixOS):
 
@@ -158,23 +185,33 @@ systemctl enable --now keyd.service
 
 Run the following in your terminal:
 
+1. Install Nix package manager using the single-user installation script (assuming its not already installed)
 ```bash
-# Install Nix package manager using the single-user installation script (assuming its not already installed)
 sh <(curl -L https://nixos.org/nix/install) --no-daemon
+```
 
-# Update environment to allow for Nix to work in active shell
+2. Update environment to allow for Nix to work in active shell
+```bash
 . $HOME/.nix-profile/etc/profile.d/nix.sh
+```
 
-# Install keyd via the Nix package manager
+3. Install keyd via the Nix package manager
+```bash
 nix-env -iA nixpkgs.keyd
+```
 
-# Allow for current user to run keyd with sudo without password by appending a line to /etc/sudoers
+4. Allow for current user to run keyd with sudo without password by appending a line to /etc/sudoers
+```bash
 echo "$USER ALL=(ALL) NOPASSWD: $HOME/.nix-profile/bin/keyd" | sudo tee -a /etc/sudoers 1> /dev/null
+```
 
-# Make directory in .config for systemd user services if it doesn't already exist
+5. Make directory in .config for systemd user services if it doesn't already exist
+```bash
 mkdir -p $HOME/.config/systemd/user/
+```
 
-# Create systemd user service file for keyd
+6. Create systemd user service file for keyd
+```bash
 echo "[Unit]
 Description=key remapping daemon
 
@@ -185,17 +222,25 @@ ExecStart=/usr/bin/sudo $HOME/.nix-profile/bin/keyd
 [Install]
 WantedBy=default.target
 " | sudo tee $HOME/.config/systemd/user/keyd.service 1> /dev/null
+```
 
-# Make directory for keyd config files if it doesn't already exist
+7. Make directory for keyd config files if it doesn't already exist
+```bash
 sudo mkdir -p /etc/keyd/
+```
 
-# Add unicode support for current user by symlinking path of keyd.compose to ~/.XCompose
+8. Add unicode support for current user by symlinking path of keyd.compose to ~/.XCompose
+```bash
 ln -s "$(nix-build '<nixpkgs>' --attr keyd --no-out-link)/share/keyd/keyd.compose" ~/.XCompose
+```
 
-# Prune every line in .XCompose after line 10000 to prevent GTK4 compiled apps from crashing
+9. Prune every line in .XCompose after line 10000 to prevent GTK4 compiled apps from crashing
+```bash
 head -n 10000 ~/.XCompose > ~/.XCompose.temp && mv ~/.XCompose.temp ~/.XCompose
+```
 
-# Create file 'default.conf' in keyd config directory if it doesn't already exist and write to that file
+10. Create file 'default.conf' in keyd config directory if it doesn't already exist and write to that file
+```bash
 echo "[ids]
 
 *
@@ -228,12 +273,14 @@ t = Ṭ
 u = Ū
 z = Ẓ
 " | sudo tee /etc/keyd/default.conf 1> /dev/null
-
-# Enable and start keyd daemon
-systemctl --user enable --now keyd.service
-
-# Thats it! You should now restart your system for changes to take effect.
 ```
+
+11. Enable and start keyd daemon
+```bash
+systemctl --user enable --now keyd.service
+```
+
+Thats it! You should now restart your system for changes to take effect.
 
 ### Using NixOS:
 
