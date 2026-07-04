@@ -38,8 +38,8 @@ doas tee /etc/keyd/default.conf 1> /dev/null <<- 'EOF'
 	t = ṭ
 	u = ū
 	z = ẓ
-	l = ʿ
 	j = ʾ
+	l = ʿ
 
 	[alt+shift]
 
