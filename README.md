@@ -291,7 +291,7 @@ Thats it! You should now restart your system for changes to take effect.
 
 ### Using NixOS:
 
-First, put the following in your configuration.nix and switch to the new configuration:
+Simply put the following in your configuration.nix and switch to the new configuration:
 
 ```nix
   # Enable keyd service and write configs
@@ -306,42 +306,44 @@ First, put the following in your configuration.nix and switch to the new configu
           };
 
           alt = {
-            a = "ā";
-            d = "ḍ";
-            h = "ḥ";
-            i = "ī";
-            s = "ṣ";
-            t = "ṭ";
-            u = "ū";
-            z = "ẓ";
-            l = "ʿ";
-            j = "ʾ";
+            a = "ā";  # ا alif (long vowel)
+            d = "ḍ";  # ض ḍād
+            h = "ḥ";  # ح ḥāʾ
+            i = "ī";  # ي yāʾ (long vowel)
+            s = "ṣ";  # ص ṣād
+            t = "ṭ";  # ط ṭāʾ
+            u = "ū";  # و wāw (long vowel)
+            z = "ẓ";  # ظ ẓāʾ
+            j = "ʾ";  # ء hamza
+            l = "ʿ";  # ع ʿayn
           };
 
           "alt+shift" = {
-            a = "Ā";
-            d = "Ḍ";
-            h = "Ḥ";
-            i = "Ī";
-            s = "Ṣ";
-            t = "Ṭ";
-            u = "Ū";
-            z = "Ẓ";
+            a = "Ā";  # ا alif (long vowel)
+            d = "Ḍ";  # ض ḍād
+            h = "Ḥ";  # ح ḥāʾ
+            i = "Ī";  # ي yāʾ (long vowel)
+            s = "Ṣ";  # ص ṣād
+            t = "Ṭ";  # ط ṭāʾ
+            u = "Ū";  # و wāw (long vowel)
+            z = "Ẓ";  # ظ ẓāʾ
           };
         };
       };
     };
   };
 
+  # Enable unicode suppert system-wide by settings the $XCOMPOSEFILE environment variable
+  # Alternatively, compose file can be enabled on a per-user basis using home-manager
+  environment.sessionVariables."XCOMPOSEFILE" = "${pkgs.keyd}/share/keyd/keyd.compose";
+
+  # Optional, but makes sure that when you type the make palm rejection work with keyd
+  # https://github.com/rvaiya/keyd/issues/723
+  environment.etc."libinput/local-overrides.quirks".text = ''
+    [Serial Keyboards]
+    MatchUdevType=keyboard
+    MatchName=keyd virtual keyboard
+    AttrKeyboardIntegration=internal
+  '';
 ```
 
-Then, run the following commands in your terminal to add unicode support to keyd:
-
-1. Add unicode support for current user by symlinking path of keyd.compose to ~/.XCompose
-```bash
-ln -s "$(nix-build '<nixpkgs>' --attr keyd --no-out-link)/share/keyd/keyd.compose" "$HOME/.XCompose"
-```
-2. Prune every line in .XCompose after line 10000 to prevent GTK4 compiled apps from crashing
-```bash
-head -n 10000 "$HOME/.XCompose" > "$HOME/.XCompose.temp" && mv -f "$HOME/.XCompose.temp" "$HOME/.XCompose"
-```
