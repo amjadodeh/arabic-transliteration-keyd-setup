@@ -5,6 +5,29 @@
 
 This repository contains scripts to configure keyd for mapping Arabic characters to specific Unicode characters, facilitating Arabic to English transliteration on Linux systems.
 
+## Purpose
+
+Scholarly writings English usually don't use Arabic script, but rather a romanized *transliteration*, whereby each Arabic letter is written with a Latin letter with diacritics added for the sounds plain Latin can't otherwise distinguish. Characters like ḥ, ṣ, ā, and ʿ aren't on any standard keyboard layout, which makes them tedious to type.
+
+This repository configures [keyd](https://github.com/rvaiya/keyd) so that holding **Left Alt** turns your normal letter keys into those transliteration characters. For example, `Alt + h` types **ḥ**, `Alt + s` types **ṣ**, and adding **Shift** gives the capital (**Ḥ**). Every other key still types normally, so the layer is only there when you actually want a special character.
+
+These characters follow the **IJMES** (International Journal of Middle East Studies) transliteration system, the standard used in English-language Middle East studies. It writes the long vowels with macrons (ā, ī, ū), marks ḥ and the four emphatic consonants (ṣ, ḍ, ṭ, ẓ) with a dot below, and renders ʿayn (ʿ) and hamza (ʾ) with half-rings. Everything else is typed with ordinary keys (plain Latin letters and the digraphs th, kh, dh, sh, and gh) so only these non-ASCII characters need remapping.
+
+| Keys | Output | Arabic letter |
+|:----:|:------:|:-------------:|
+| `Alt + a` | ā | ا&nbsp;&nbsp;(long ā) |
+| `Alt + d` | ḍ | ض&nbsp;&nbsp;ḍād |
+| `Alt + h` | ḥ | ح&nbsp;&nbsp;ḥāʾ |
+| `Alt + i` | ī | ي&nbsp;&nbsp;(long ī) |
+| `Alt + s` | ṣ | ص&nbsp;&nbsp;ṣād |
+| `Alt + t` | ṭ | ط&nbsp;&nbsp;ṭāʾ |
+| `Alt + u` | ū | و&nbsp;&nbsp;(long ū) |
+| `Alt + z` | ẓ | ظ&nbsp;&nbsp;ẓāʾ |
+| `Alt + j` | ʾ | ء&nbsp;&nbsp;hamza |
+| `Alt + l` | ʿ | ع&nbsp;&nbsp;ʿayn |
+
+Add **Shift** for the capital forms (Ā, Ḍ, Ḥ, Ī, Ṣ, Ṭ, Ū, Ẓ), used for proper nouns and at the start of sentences. ʿayn and hamza have no capital forms.
+
 ## Automated Setup
 
 NOTE: This requires curl to run
