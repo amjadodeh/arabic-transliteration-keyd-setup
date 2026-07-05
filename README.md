@@ -7,7 +7,7 @@ This repository contains scripts to configure keyd for mapping Arabic characters
 
 ## Purpose
 
-Scholarly writings English usually don't use Arabic script, but rather a romanized *transliteration*, whereby each Arabic letter is written with a Latin letter with diacritics added for the sounds plain Latin can't otherwise distinguish. Characters like ḥ, ṣ, ā, and ʿ aren't on any standard keyboard layout, which makes them tedious to type.
+Scholarly writings in English usually don't use Arabic script, but rather a romanized *transliteration*, whereby each Arabic letter is written with a Latin letter with diacritics added for the sounds plain Latin can't otherwise distinguish. Characters like ḥ, ṣ, ā, and ʿ aren't on any standard keyboard layout, which makes them tedious to type.
 
 This repository configures [keyd](https://github.com/rvaiya/keyd) so that holding **Left Alt** turns your normal letter keys into those transliteration characters. For example, `Alt + h` types **ḥ**, `Alt + s` types **ṣ**, and adding **Shift** gives the capital (**Ḥ**). Every other key still types normally, so the layer is only there when you actually want a special character.
 
